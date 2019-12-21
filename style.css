@@ -1,0 +1,7 @@
+#mainContent {
+    display: inline-flex;
+    background: black;
+    position: fixed;
+    width: 100vw;
+    height: 100px;
+}
