@@ -25,4 +25,9 @@ div {
 
 .row {
     width: 100vw;
+    position: relative;
+}
+
+.slatePixel {
+    position: relative;
 }
