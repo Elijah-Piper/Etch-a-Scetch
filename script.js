@@ -41,15 +41,22 @@ function drawSlate(sideLength) {
 }
 drawSlate(gridSideLength);
 
-let resetButton = document.getElementById("resetButton");
-resetButton.onclick = function() {
+let clearButton = document.getElementById("clearButton");
+clearButton.onclick = function() {
+    eraseSlate();
+    drawSlate(gridSideLength);
+    console.log("New drawn with side length of: " + gridSideLength);
+}
+
+let resetResizeButton = document.getElementById("resetResizeButton");
+resetResizeButton.onclick = function() {
+    eraseSlate();
     tempLength = prompt("Enter a side length (single number) or leave blank for default (16x16):");
     console.log("tempLength: " + tempLength);                                                                                                                                                                                                                 
-    eraseSlate();
     if (tempLength !== "") {
         gridSideLength = tempLength;
         drawSlate(gridSideLength);
-        console.log("New drawn with side length of: " + gridSideLength);
+        console.log("Default drawn");
     }
     else { drawSlate(gridSideLength);
     console.log("Default drawn"); }
