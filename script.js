@@ -17,8 +17,9 @@ function drawSlate(sideLength) {
     for (let i = 0; i < gridSideLength; i++) {
         var div = document.createElement("div");
         div.style.height = screenDivisionValue + "vw";
-        div.setAttribute("id", "newDiv")
+        div.setAttribute("id", "newDiv");
         div.setAttribute("class", "row");
+        div.style.bottom = (3 * i) + "px";
         mainContentDiv.appendChild(div);
         try {
             for (let j = 0; j < gridSideLength; j++) {
@@ -43,7 +44,7 @@ drawSlate(gridSideLength);
 let resetButton = document.getElementById("resetButton");
 resetButton.onclick = function() {
     tempLength = prompt("Enter a side length (single number) or leave blank for default (16x16):");
-    console.log("tempLength: " + tempLength);
+    console.log("tempLength: " + tempLength);                                                                                                                                                                                                                 
     eraseSlate();
     if (tempLength !== "") {
         gridSideLength = tempLength;
