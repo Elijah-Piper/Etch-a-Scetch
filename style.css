@@ -1,7 +1,28 @@
 #mainContent {
-    display: inline-flex;
-    background: black;
-    position: fixed;
+    display: block;
+    background: white;
+    position: static;
     width: 100vw;
-    height: 100px;
+    height: 100vw;
+    padding-top: 20px;
+    border: 0;
+}
+
+header {
+    position: absolute;
+    height: 20px;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+div {
+    background: white;
+    display: inline-flex;
+    border-width: 1px;
+}
+
+.row {
+    width: 100vw;
 }
