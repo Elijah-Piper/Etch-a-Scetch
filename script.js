@@ -17,22 +17,20 @@ function drawSlate(sideLength) {
     for (let i = 0; i < gridSideLength; i++) {
         var div = document.createElement("div");
         div.style.height = screenDivisionValue + "vw";
-        div.setAttribute("id", "newDiv");
+        div.setAttribute("id", "newRow");
         div.setAttribute("class", "row");
         div.style.bottom = (3 * i) + "px";
         mainContentDiv.appendChild(div);
         try {
             for (let j = 0; j < gridSideLength; j++) {
-                var div = document.createElement("div");
-                div.style.width = screenDivisionValue + "vw";
-                div.setAttribute("class", "slatePixel");
-                div.addEventListener("mouseover", function(event) {
-                    event.target.style.background = "cyan";
-                });
-                document.getElementById("newDiv").appendChild(div);
+                let mode = document.getElementById("mode-selector").value;
+                var pix = document.createElement("div");
+                setDrawMode(mode, pix);
+                document.getElementById("newRow").appendChild(pix);
+                pix.style.width = screenDivisionValue + "vw";
             }
         } finally {
-            document.getElementById("newDiv").setAttribute("id", "");
+            document.getElementById("newRow").setAttribute("id", "");
         }
     }
     let rowsNumber = mainContentDiv.childElementCount;
@@ -41,25 +39,56 @@ function drawSlate(sideLength) {
 }
 drawSlate(gridSideLength);
 
+let resetResizeButton = document.getElementById("resetResizeButton");
+resetResizeButton.onclick = function() {
+    tempLength = prompt("Enter a side length (single number) or leave blank for default (16x16):");
+    console.log("tempLength: " + tempLength);                                   
+    eraseSlate();
+    if (tempLength !== "") {
+        gridSideLength = tempLength;
+        drawSlate(gridSideLength);
+        console.log("New drawn with side length of: " + gridSideLength);
+    }
+    else { drawSlate(gridSideLength);
+    console.log("Default drawn"); }
+}
+
 let clearButton = document.getElementById("clearButton");
 clearButton.onclick = function() {
     eraseSlate();
     drawSlate(gridSideLength);
-    console.log("New drawn with side length of: " + gridSideLength);
+    console.log("Default drawn");
 }
 
-let resetResizeButton = document.getElementById("resetResizeButton");
-resetResizeButton.onclick = function() {
-    eraseSlate();
-    tempLength = prompt("Enter a side length (single number) or leave blank for default (16x16):");
-    console.log("tempLength: " + tempLength);                                                                                                                                                                                                                 
-    if (tempLength !== "") {
-        gridSideLength = tempLength;
-        drawSlate(gridSideLength);
-        console.log("Default drawn");
+function setDrawMode(drawMode, element) {
+    if (drawMode === "cyan") {
+        console.log("Mode: Cyan");
+        element.addEventListener("mouseover", function() {
+            event.target.style.background = "cyan";
+        });
     }
-    else { drawSlate(gridSideLength);
-    console.log("Default drawn"); }
+    else if (drawMode === "black") {
+        console.log("Mode: Black");
+        element.addEventListener("mouseover", function() {
+            event.target.style.background = "black";
+        });
+    }
+    else if (drawMode === "rbg") {
+        console.log("Mode: RBG");
+        element.addEventListener("mouseover", function() {
+            let randNumberOne = Math.floor((Math.random() * 255));
+            let randNumberTwo = Math.floor((Math.random() * 255));
+            let randNumberThree = Math.floor((Math.random() * 255));
+            event.target.style.background = "rbg(" + randNumberOne + "," + randNumberTwo + "," + randNumberThree + ")";
+        });
+    }
+    else if (drawMode === "opacity-increment") {
+        console.log("Mode: Opacity-Increment");
+        element.addEventListener("mouseover", function() {
+            let currentOpacity = event.target.style.opacity;
+            event.target.style.opacity = currentOpacity
+        })
+    }
 }
 
 // pixelArray 'pixels' begin at index 1, not index 0
