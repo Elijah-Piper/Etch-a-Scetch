@@ -81,15 +81,19 @@ function setDrawMode(drawMode, element) {
             let randNumberTwo = Math.floor((Math.random() * 255));
             let randNumberThree = Math.floor((Math.random() * 255));
             let randRGB = "rgb(" + randNumberOne + ", " + randNumberTwo + ", " + randNumberThree + ", 100)";
-            console.log(randRGB);
             event.target.style.background = randRGB;
         });
     }
     else if (drawMode === "opacity-increment") {
         console.log("Mode: Opacity-Increment");
+        element.style.background = "rgb(0,0,0,0)";
+        let incrementCount = 1;
         element.addEventListener("mouseover", function() {
-            let currentOpacity = event.target.style.opacity;
-            event.target.style.opacity = currentOpacity
+            let opacityIncrement = 0.1;
+            let backgroundColor = "rgb(0,0,0," + (opacityIncrement * incrementCount) + ")";
+            event.target.style.background = backgroundColor;
+            incrementCount++;
+            console.log("Color: " + event.target.style.background + "\nIncrement Count: " + incrementCount);
         })
     }
 }
