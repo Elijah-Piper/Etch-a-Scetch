@@ -2,6 +2,7 @@ let gridSideLength = 16;
 let screenDivisionValue = (1 / gridSideLength) * 100
 let mainContentDiv = document.getElementById("mainContent");
 let slateDivList = mainContentDiv.childNodes;
+let mode = document.getElementById("mode-selector").value;
 
 function eraseSlate() {
     let i = 0;
@@ -23,7 +24,7 @@ function drawSlate(sideLength) {
         mainContentDiv.appendChild(div);
         try {
             for (let j = 0; j < gridSideLength; j++) {
-                let mode = document.getElementById("mode-selector").value;
+                mode = document.getElementById("mode-selector").value;
                 var pix = document.createElement("div");
                 setDrawMode(mode, pix);
                 document.getElementById("newRow").appendChild(pix);
@@ -79,7 +80,9 @@ function setDrawMode(drawMode, element) {
             let randNumberOne = Math.floor((Math.random() * 255));
             let randNumberTwo = Math.floor((Math.random() * 255));
             let randNumberThree = Math.floor((Math.random() * 255));
-            event.target.style.background = "rbg(" + randNumberOne + "," + randNumberTwo + "," + randNumberThree + ")";
+            let randRGB = "rgb(" + randNumberOne + ", " + randNumberTwo + ", " + randNumberThree + ", 100)";
+            console.log(randRGB);
+            event.target.style.background = randRGB;
         });
     }
     else if (drawMode === "opacity-increment") {
